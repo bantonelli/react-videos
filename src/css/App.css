@@ -1,4 +1,4 @@
 .main-content {
-    display: grid;
-    grid-template-columns: 1fr 320px;
+    display: flex;
+    flex-wrap: wrap;
 }

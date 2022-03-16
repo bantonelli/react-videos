@@ -3,6 +3,7 @@ import '../css/VideoList.css'
 
 class VideoList extends React.Component {
 
+    // Could be a separate VideoItem component 
     makeVideoItem = (video) => {
         const { id, snippet } = video 
         const { title, description, thumbnails, channelTitle} = snippet
@@ -26,16 +27,24 @@ class VideoList extends React.Component {
 
     render() {
         // console.log("VIDEO LIST: ", this.props.videoList)
-        const listItems = this.props.videoList.map((video) => {
-            console.log("MAKE VIDEO ITEM: ", this.makeVideoItem);
-            return this.makeVideoItem(video);
-        })
+        let listItems = []
+        if (Array.isArray(this.props.videoList)) {
+            listItems = this.props.videoList.map((video) => {
+                return this.makeVideoItem(video);
+            })
+            return (
+                <div className="ui relaxed divided list video-list">
+                    {listItems}
+                </div>
+            )                
+        } else {
+            return (
+                <div className="ui list video-list">
+                    {this.props.videoList}
+                </div>
+            );
+        }
 
-        return (
-            <div className="ui list video-list">
-                {listItems}
-            </div>
-        )
     }
 
 }

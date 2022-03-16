@@ -23,8 +23,11 @@ class App extends React.Component {
             }
         })
 
-        searchResults = searchResults.data.items
-
+        if (searchResults.status === 200) {
+            searchResults = searchResults.data.items            
+        } else {
+            searchResults = 'Error searching YT'
+        }
         this.setState({
             searchResults
         })
