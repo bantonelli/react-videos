@@ -1,6 +1,10 @@
 import React from "react";
-import SearchBar from "./SearchBar";
-import youtube from "../api/youtube";
+import SearchBar from "./SearchBar"
+import VideoList from './VideoList'
+import VideoDetail from "./VideoDetail"
+import youtube from "../api/youtube"
+
+import '../css/App.css'
     
 class App extends React.Component {
 
@@ -21,11 +25,9 @@ class App extends React.Component {
                 <SearchBar
                     callback={this.youtubeSearch}
                 ></SearchBar>
-                <div className="column">
-                    <p>Main Content</p>
-                </div>
-                <div className="column">
-                    <p>Video List</p>
+                <div className="main-content">
+                    <VideoDetail></VideoDetail>
+                    <VideoList></VideoList>
                 </div>
             </div>
         );
