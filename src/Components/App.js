@@ -11,8 +11,13 @@ class App extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            searchResults: []
+            searchResults: '',
+            currentVideo: null
         }
+    }
+
+    componentDidMount() {
+        this.youtubeSearch("buildings");
     }
 
     youtubeSearch = async (searchTerm) => {
@@ -23,15 +28,24 @@ class App extends React.Component {
             }
         })
 
+        let currentVideo = null
+
         if (searchResults.status === 200) {
-            searchResults = searchResults.data.items            
+            searchResults = searchResults.data.items
+            currentVideo = searchResults[0]
         } else {
             searchResults = 'Error searching YT'
         }
         this.setState({
-            searchResults
+            searchResults,
+            currentVideo
         })
         
+    }
+
+    setCurrentVideo = (video) => {
+        // console.log("CURRENT VIDEO: ", video)
+        this.setState({currentVideo: video})
     }
     render() {
         return (
@@ -40,9 +54,12 @@ class App extends React.Component {
                     callback={this.youtubeSearch}
                 ></SearchBar>
                 <div className="main-content">
-                    <VideoDetail></VideoDetail>
+                    <VideoDetail
+                        video={this.state.currentVideo}
+                    ></VideoDetail>
                     <VideoList
                         videoList={this.state.searchResults}
+                        callback={this.setCurrentVideo}
                     ></VideoList>
                 </div>
             </div>
