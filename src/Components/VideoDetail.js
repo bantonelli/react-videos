@@ -1,4 +1,5 @@
 import React from 'react'
+import '../css/VideoDetail.css'
 
 class VideoDetail extends React.Component {
     render() {

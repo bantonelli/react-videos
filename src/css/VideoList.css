@@ -1,0 +1,11 @@
+.video-list .item {
+    margin: 0 0 20px 0;
+}
+
+.video-list .item img {
+    padding: 8px;
+}
+
+.video-list .item .content .header {
+    margin: 8px 0;
+}

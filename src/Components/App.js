@@ -8,16 +8,27 @@ import '../css/App.css'
     
 class App extends React.Component {
 
-    youtubeSearch = (searchTerm) => {
+    constructor(props) {
+        super(props)
+        this.state = {
+            searchResults: []
+        }
+    }
+
+    youtubeSearch = async (searchTerm) => {
         console.log("YT SEARCH TERM: ", searchTerm)
-        youtube.get('/search', {
+        let searchResults = await youtube.get('/search', {
             params: {
                 q: searchTerm
             }
-        }).then((result) => {
-            console.log("YT API: ", result)
         })
 
+        searchResults = searchResults.data.items
+
+        this.setState({
+            searchResults
+        })
+        
     }
     render() {
         return (
@@ -27,7 +38,9 @@ class App extends React.Component {
                 ></SearchBar>
                 <div className="main-content">
                     <VideoDetail></VideoDetail>
-                    <VideoList></VideoList>
+                    <VideoList
+                        videoList={this.state.searchResults}
+                    ></VideoList>
                 </div>
             </div>
         );
